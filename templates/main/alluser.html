@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+{%block content%}
+   {%for tr in  all_user%}
+    {% if tr.avatar%}
+    <div class="container my-5">
+      <div class="row">
+        <div class = "col-md-8">
+          <a href="{% url 'main:main_for_all' pk=tr.pk %}">
+          <img class="w-50" src="{{tr.avatar.url}}">
+        </a>
+        </div>
+        <div class = "col-md-4 text-left">
+           <h2>{{tr.username}}</h2>
+           {% if tr.bio%}
+           <p>О себе:{{tr.bio}}</p>
+           {% endif %}
+        </div>
+    </div>
+    {% endif %}
+     {%endfor%}
+{% endblock %}

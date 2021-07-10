@@ -1,0 +1,17 @@
+{% extends "layout/basic.html" %}
+{% load bootstrap5 %}
+{%block content%}
+  {% if user.is_authenticated %}
+<р>Вы уже выполнили вход.</р>
+{% else %}
+<form method="post">
+{% csrf_token %}
+{% bootstrap_form form layout='horizontal' %}
+<input type="hidden" name="next" value="{{ next }}">
+{% buttons submit='Войти' %}{% endbuttons %}
+
+</form>
+<a href="{% url 'main:register' %}" class="btn btn-outline-success  me-md-2" role="button">Peгистрация</a>
+{% endif %}
+
+{% endblock %}

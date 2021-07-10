@@ -1,0 +1,29 @@
+{% extends "layout/basic.html" %}
+{% load bootstrap5 %}
+{%block content%}
+{%for vv in post%}
+<div class="container my-5">
+      <div class="row justify-content-md-center">
+        <div class = "col-md-8">
+          <img class="w-100" src="{{vv.image.url}}">
+      </div>
+</div>
+<h3>Подпись автора({{vv.author}}):{{vv.text}}</h3>
+{%endfor%}
+{% if comments%}
+Коментарии:
+{%for ff in comments%}
+ <h5>{{ff.author}}:{{ff.content}}</h5>
+
+{%endfor%}
+ {% endif %}
+{% if user.is_authenticated %}
+    <b2>Добавить свой коментарий</b2>
+<form method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  {{form.as_p}}
+  {% buttons submit='Добавить' %}{% endbuttons %}
+</form>
+{% endif %}
+
+{% endblock %}
